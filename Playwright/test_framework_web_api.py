@@ -5,14 +5,26 @@ from playwright.sync_api import Page
 import pytest #importing page class which will provide the fixtre of
 from utils.api_base import APIUtils
 
-with open('Playwright/data/credentials.json') as f:
+with open('data/credentials.json') as f:
         test_data = json.load(f)
         print(test_data)
         user_credentials_list = test_data["user_credentials"] #this will extract the list of user credentials from the json file. this is used to get the user credentials for login.
-        user_credentials = user_credentials_list[0]
 
-@pytest.mark.parametrize("user_credentials", user_credentials_list) #this will run the test for each set of user credentials in the list. this is used to run the test for multiple user credentials.
-def test_e2e_web_api(playwright: Playwright):
+
+@pytest.mark.parametrize('user_credentials', user_credentials_list)
+def test_parameter_login(playwright: Playwright, user_credentials): #have to make sure this user_credentials is returning the parameter
+    browser = playwright.chromium.launch(headless=False)
+    context = browser.new_context()
+    page = context.new_page()
+    page.goto("https://rahulshettyacademy.com/client")
+    page.locator("#userEmail").fill(user_credentials["userEmail"]) #this will fill the email field with the user email from the json file. we are using the user credentials from the json file to fill the login form. this is a good practice to externalize the data from the code and use it in the test. so that we can easily maintain the data and also we can easily change the data without changing the code. this is a good practice to follow in automation testing.
+    page.locator("#userPassword").fill(user_credentials["userPassword"])
+    page.locator("#login").click()
+    time.sleep(1)
+      
+
+@pytest.mark.parametrize('user_credentials', user_credentials_list) #this will run the test for each set of user credentials in the list. this is used to run the test for multiple user credentials.
+def test_e2e_web_api(playwright: Playwright, user_credentials): #have to make sure this user_credentials is returning the parameter
     browser = playwright.chromium.launch(headless=False)
     context = browser.new_context()
     page = context.new_page()
@@ -23,7 +35,7 @@ def test_e2e_web_api(playwright: Playwright):
 
     #login to the application
     page.goto("https://rahulshettyacademy.com/client")
-    page.locator("#userEmail").fill(user_credentials["userEmail"])
+    page.locator("#userEmail").fill(user_credentials["userEmail"]) #this will fill the email field with the user email from the json file. we are using the user credentials from the json file to fill the login form. this is a good practice to externalize the data from the code and use it in the test. so that we can easily maintain the data and also we can easily change the data without changing the code. this is a good practice to follow in automation testing.
     page.locator("#userPassword").fill(user_credentials["userPassword"])
     page.locator("#login").click()
     time.sleep(1)

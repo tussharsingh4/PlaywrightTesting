@@ -1,8 +1,7 @@
 
 from playwright.sync_api import Playwright
 
-order_paylaod = {"orders":[{"country":"India","productOrderedId":"6960ea76c941646b7a8b3dd5"},{"country":"India","productOrderedId":"6974c455c941646b7ab49143"},{"country":"India","productOrderedId":"6960eae1c941646b7a8b3ed3"},{"country":"India","productOrderedId":"6960eac0c941646b7a8b3e68"}]}
-
+order_paylaod = {"orders":[{"country":"India","productOrderedId":"6960ea76c941646b7a8b3dd5"},{"country":"India","productOrderedId":"6960eac0c941646b7a8b3e68"},{"country":"India","productOrderedId":"6960eae1c941646b7a8b3ed3"}]}
 class APIUtils: #this utility is going to create an order using the calls to the api.
 
     def get_token(self, playwright:Playwright):
