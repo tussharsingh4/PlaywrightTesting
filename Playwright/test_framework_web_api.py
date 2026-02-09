@@ -1,10 +1,18 @@
+import json
 import time
 from playwright.sync_api import Playwright, sync_playwright, expect
-from playwright.sync_api import Page #importing page class which will provide the fixtre of
-
+from playwright.sync_api import Page
+import pytest #importing page class which will provide the fixtre of
 from utils.api_base import APIUtils
 
-def test_e2e_web_api(playwright: Playwright) -> None:
+with open('Playwright/data/credentials.json') as f:
+        test_data = json.load(f)
+        print(test_data)
+        user_credentials_list = test_data["user_credentials"] #this will extract the list of user credentials from the json file. this is used to get the user credentials for login.
+        user_credentials = user_credentials_list[0]
+
+@pytest.mark.parametrize("user_credentials", user_credentials_list) #this will run the test for each set of user credentials in the list. this is used to run the test for multiple user credentials.
+def test_e2e_web_api(playwright: Playwright):
     browser = playwright.chromium.launch(headless=False)
     context = browser.new_context()
     page = context.new_page()
@@ -15,8 +23,8 @@ def test_e2e_web_api(playwright: Playwright) -> None:
 
     #login to the application
     page.goto("https://rahulshettyacademy.com/client")
-    page.locator("#userEmail").fill("rahulshetty@gmail.com")
-    page.locator("#userPassword").fill("Iamking@000")
+    page.locator("#userEmail").fill(user_credentials["userEmail"])
+    page.locator("#userPassword").fill(user_credentials["userPassword"])
     page.locator("#login").click()
     time.sleep(1)
 
@@ -26,6 +34,9 @@ def test_e2e_web_api(playwright: Playwright) -> None:
     row_coat_order_id = page.locator("tr").filter(has_text=order_id)
     row_coat_order_id.get_by_role("button", name="View").click() #this will scan only that particular row which has the order id and then click on the view button. this is very useful when we have multiple orders in the order history and we want to verify only a particular order. so we can use this approach to scan only that particular row which has the order id and then click on the view button.
     time.sleep(5)
+    #page.screenshot(path=screenshot_path + "screenshot/orderconfirmation.png")
     expect(page.locator(".tagline")).to_have_text("Thank you for Shopping With Us")
-
+    
     browser.close()
+
+#json file to extract the details. Externalizing the data from the code is a good practice. so that we can easily maintain the data and also we can easily change the data without changing the code. this is a good practice to follow in automation testing.

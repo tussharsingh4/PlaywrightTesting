@@ -1,8 +1,7 @@
 
 from playwright.sync_api import Playwright
 
-order_paylaod = {"orders":[{"country":"India","productOrderedId":"6960eae1c941646b7a8b3ed3"},{"country":"India","productOrderedId":"6964a1cbc941646b7a91786b"},{"country":"India","productOrderedId":"6960eac0c941646b7a8b3e68"}]}
-
+order_paylaod = {"orders":[{"country":"India","productOrderedId":"6960ea76c941646b7a8b3dd5"},{"country":"India","productOrderedId":"6974c455c941646b7ab49143"},{"country":"India","productOrderedId":"6960eae1c941646b7a8b3ed3"},{"country":"India","productOrderedId":"6960eac0c941646b7a8b3e68"}]}
 
 class APIUtils: #this utility is going to create an order using the calls to the api.
 
@@ -29,6 +28,6 @@ class APIUtils: #this utility is going to create an order using the calls to the
         response_body = response.json() #this will convert the response into json format. so that we can easily read it and use it for further processing.
         #response_body["orders"] #this is giving a list of orders which we have created. because we are sending a list of orders in the request payload. so it is giving a list of orders in the response as well.
         #to extract the first order id, writing the code below
-        order_id = response_body["orders"][1] #this will extract the first order id from the response. because we are sending a list of orders in the request payload. so it is giving a list of orders in the response as well. so we can extract the first order id from the list of orders in the response.
+        order_id = response_body["orders"][0] #this will extract the first order id from the response. because we are sending a list of orders in the request payload. so it is giving a list of orders in the response as well. so we can extract the first order id from the list of orders in the response.
         print(order_id) #this will print the order id which we have extracted from the response
         return order_id #this will return the order id to the caller. so that we can use it for further processing. like we can use it to verify the order in the ui or we can use it to delete the order from the api.
