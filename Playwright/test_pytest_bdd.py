@@ -59,3 +59,4 @@ def select_order_id(shared_data):
 def order_message_should_be_displayed(shared_data):
     orderDetailsPage = shared_data["orderDetails_Page"]    #getting the order details page object from the shared data dictionary with the key as orderDetailsPage. this is a good practice to store the data in a dictionary and then use it in the code. so that we can easily maintain the data and also we can easily change the data without changing the code. this is a good practice to follow in automation testing.
     orderDetailsPage.verifyOrderMessage()                 #this will call the verify_order_success_message method of the order details page to verify the order success message. this is used to perform the action of verifying the order success message on the order details page. we can use this method in the test cases to perform the action of verifying the order success message on the order details page.
+
