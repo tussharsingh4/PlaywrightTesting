@@ -15,7 +15,7 @@ def shared_data():
 
 @given(parsers.parse('Place item order with {username} and {password}')) #to cath it in bdd, here in step definition file we use curly braces to specify the parameter which we are passing from the feature file. this is used to parameterize the test and make it more flexible. so that we can run the same test with different data without changing the code. this is a good practice to follow in automation testing.
 def place_item_order(playwright: Playwright, username, password, shared_data):
-
+    
     user_credentials = {}                           #this is a dictionary which will store the user credentials. we can use this dictionary to pass the user credentials to the api call. this is a good practice to store the data in a dictionary and then use it in the code. so that we can easily maintain the data and also we can easily change the data without changing the code. this is a good practice to follow in automation testing.
     
     user_credentials["userEmail"] = username        #this will store the username in the dictionary with the key as userEmail. this is a good practice to store the data in a dictionary and then use it in the code. so that we can easily maintain the data and also we can easily change the data without changing the code. this is a good practice to follow in automation testing.
