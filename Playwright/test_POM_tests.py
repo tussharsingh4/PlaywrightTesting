@@ -1,9 +1,7 @@
 import json
 import time
-from playwright.sync_api import Playwright, sync_playwright, expect
-from playwright.sync_api import Page
+from playwright.sync_api import Playwright
 import pytest #importing page class which will provide the fixtre of
-from pageObjects.dashboard import DashboardPage
 from pageObjects.login import LoginPage
 
 with open('data/credentials.json') as f:

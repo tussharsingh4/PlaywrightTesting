@@ -10,4 +10,3 @@ Feature: Order Transaction
         Examples:
       | username                | password    |
       | rahulshetty@gmail.com   | Iamking@000 |
-    
