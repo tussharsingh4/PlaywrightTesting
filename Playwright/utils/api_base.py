@@ -5,11 +5,12 @@ order_paylaod = {"orders":[{"country":"India","productOrderedId":"6960ea76c94164
 class APIUtils: #this utility is going to create an order using the calls to the api.
 
     def get_token(self, playwright:Playwright, user_credentials): #this method is to get the token from the api call. we need the token for authentication. so we can call this method to get the token and then use it for creating the order.
+        
         api_request_context = playwright.request.new_context(base_url="https://rahulshettyacademy.com") #this is to set the base url for all the api calls. so that we dont have to write the full url every time.
         
         #response = api_request_context.post("/api/ecom/auth/login", data={"userEmail":"rahulshetty@gmail.com","userPassword":"Iamking@000"})
 
-        response = api_request_context.post("/api/ecom/auth/login", data={"userEmail":"rahulshetty@gmail.com","userPassword":"Iamking@000"}) #writing this code to show how we parameterized the login in the get token method.
+        response = api_request_context.post("/api/ecom/auth/login", data={"userEmail": user_credentials["userEmail"], "userPassword": user_credentials["userPassword"]}) #writing this code to show how we parameterized the login in the get token method.
         #the above code with user id and password can also be written with using a variable =user_credentials["userEmail"] and then passing the variable in the data. but this is more concise and easy to read. so we can directly use the user_credentials["userEmail"] and user_credentials["userPassword"] in the data.
 
         #these details are stored as dictionary above. Key value pair.

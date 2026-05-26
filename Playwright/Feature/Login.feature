@@ -8,5 +8,5 @@ Feature: Order Transaction
         And select the orderId
         Then I should see the order details with order success message
         Examples:
-      | username                | password    |
-      | rahulshetty@gmail.com   | Iamking@000 |
+      | username                | password    | 
+      | rahulshetty@gmail.com   | Iamking@000 | 

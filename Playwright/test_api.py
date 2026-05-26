@@ -5,4 +5,3 @@ def test_api_get(playwright: Playwright):
     response = request.get('https://jsonplaceholder.typicode.com/posts/1')
     assert response.status == 200
     print(response.json())
- 
